@@ -1,0 +1,62 @@
+app_name: lit-inspector
+environment: development
+mock_mode: false
+
+enabled_steps:
+  - search_validation
+  - paper_verification
+  - data_extraction
+  - table_comparison
+
+llm:
+  provider: qwen                  # mock | openai | anthropic | gemini | qwen
+  model: qwen-plus                # qwen model name
+  temperature: 0.1
+  max_tokens: 4096
+  api_key: "you api key"
+  base_url: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+
+
+llm2:
+  provider: openai                  # mock | openai | anthropic | gemini | qwen
+  model: openrouter/free                # gemini model name
+  temperature: 0.1
+  max_tokens: 4096
+  api_key: "you api key"
+  base_url: "https://openrouter.ai/api/v1"
+
+
+#llm2:
+ # provider: gemini                  # mock | openai | anthropic | gemini | qwen
+ # model: gemini-2.5-flash                # gemini model name
+ # temperature: 0.1
+ # max_tokens: 4096
+ # api_key: "you api key"
+ # base_url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
+
+pubmed:
+  api_key: "bfea2958d9fe7a9b6e00942f510c132da208"
+  base_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+  rate_limit: 10.0
+  email: "you email"    # NCBI recommended; also used by Unpaywall
+
+# Unpaywall: free API to discover open-access full-text papers
+# Only requires an email address (no API key).
+# https://unpaywall.org/products/api
+unpaywall:
+  email: "you email"    # your real email for Unpaywall TOS
+  enabled: true
+
+crossref:
+  base_url: "https://api.crossref.org"
+  mailto: "you email"
+  timeout: 30.0
+
+thresholds:
+  title_similarity: 0.85
+  author_match_ratio: 0.8
+
+paths:
+  data_dir: ./data
+  output_dir: ./output
+  log_file: ./logs/lit_inspector.log
